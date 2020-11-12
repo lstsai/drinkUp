@@ -7,7 +7,7 @@ import paho.mqtt.client as mqtt
 import time
 from datetime import datetime
 from influxdb import InfluxDBClient
-import grovipi
+import grovepi
 class waterSensor():
     sendLevel=True
     maxLevel=10
