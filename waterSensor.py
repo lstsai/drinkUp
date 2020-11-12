@@ -76,10 +76,10 @@ class waterSensor():
         ledMax= 2
         ledMin= 3
         reading =1
-        lastReading=13-grovepi.ultrasonicRead(ranger)
+        lastReading=12-grovepi.ultrasonicRead(ranger)
         lastReading=1
         while True:
-            self.currReading=13-grovepi.ultrasonicRead(ranger)
+            self.currReading=12-grovepi.ultrasonicRead(ranger)
             if abs(self.currReading-lastReading)<5:
                 self.sendReading()
                 client.publish("lstsai/waterLevel", self.currReading)
