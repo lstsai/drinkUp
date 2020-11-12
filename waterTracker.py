@@ -52,14 +52,14 @@ class waterTracker():
 
             if command == 'setMax':
                 maxL=int(input('Maximum Level: '))
-                if(maxL <self.minLevel):
-                    print("Maximum Level cannot be lower than Minimum Level")
+                if(maxL >self.minLevel):
+                    print("Maximum Level cannot be further than Minimum Level")
                 else:
                     client.publish("lstsai/maxLevel", maxL)
             if command == 'setMin':
                 minL=int(input('Minimum Level: '))
                 if(minL <self.maxLevel):
-                    print("Minimum Level cannot be higher than Maximum Level")
+                    print("Minimum Level cannot be closer than Maximum Level")
                 else:
                     client.publish("lstsai/minLevel", minL)
             if command == 'startSending':
