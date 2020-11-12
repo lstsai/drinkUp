@@ -7,7 +7,7 @@ import paho.mqtt.client as mqtt
 import time
 from datetime import datetime
 from influxdb import InfluxDBClient
-# import grovepi
+import grovepi
 class waterSensor():
     sendLevel=True
     maxLevel=10
@@ -72,30 +72,30 @@ class waterSensor():
 
         self.connectInflux()
          #set the ports
-        # ranger= 4
-        # ledMax= 2
-        # ledMin= 3
-        # reading =1
-        # # lastReading=12-grovepi.ultrasonicRead(ranger)
-        # lastReading=1
-        # while True:
-        #     self.currReading=12-grovepi.ultrasonicRead(ranger)
-        #     if abs(self.currReading-lastReading)<5:
-        #         self.sendReading()
-        #         client.publish("lstsai/waterLevel", self.currReading)
-        #         lastReading=self.currReading
-        #     if self.sendLevel:
-        #         self.sendReading()
-        #     if self.currReading>self.maxLevel:
-        #         grovepi.digitalWrite(ledMax, 1)
-        #     else:
-        #         grovepi.digitalWrite(ledMax, 0)
-        #     if self.currReading<self.minLevel:
-        #         grovepi.digitalWrite(ledMin, 1)
-        #     else:
-        #         grovepi.digitalWrite(ledMin, 0)
+        ranger= 4
+        ledMax= 2
+        ledMin= 3
+        reading =1
+        lastReading=12-grovepi.ultrasonicRead(ranger)
+        lastReading=1
+        while True:
+            self.currReading=12-grovepi.ultrasonicRead(ranger)
+            if abs(self.currReading-lastReading)<5:
+                self.sendReading()
+                client.publish("lstsai/waterLevel", self.currReading)
+                lastReading=self.currReading
+            if self.sendLevel:
+                self.sendReading()
+            if self.currReading>self.maxLevel:
+                grovepi.digitalWrite(ledMax, 1)
+            else:
+                grovepi.digitalWrite(ledMax, 0)
+            if self.currReading<self.minLevel:
+                grovepi.digitalWrite(ledMin, 1)
+            else:
+                grovepi.digitalWrite(ledMin, 0)
 
-        #     time.sleep(1)
+            time.sleep(1)
             
 if __name__ == '__main__':
     waterS= waterSensor()
