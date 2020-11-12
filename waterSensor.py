@@ -11,27 +11,28 @@ import grovepi
 class waterSensor():
     sendLevel=True
     maxLevel=2
-    minLevel=10
+    minLevel=5
     influxclient=None
     currReading=1
     def connectInflux(self):
         self.influxclient = InfluxDBClient(host='18.219.103.221', port=8086, database='waterSensor')
         self.influxclient.create_database('waterSensor')
     def sendReading(self):
-        json_body = [
-            {
-                "measurement": "levels",
-                "tags": {
-                    "host": "server01",
-                    "region": "us-west"
-                },
-                "time": datetime.now(),
-                "fields": {
-                    "waterLevel": self.currReading
+        if self.sendLevel:
+            json_body = [
+                {
+                    "measurement": "levels",
+                    "tags": {
+                        "host": "server01",
+                        "region": "us-west"
+                    },
+                    "time": datetime.now(),
+                    "fields": {
+                        "waterLevel": self.currReading
+                    }
                 }
-            }
-        ]
-        self.influxclient.write_points(json_body)
+            ]
+            self.influxclient.write_points(json_body)
 
     def on_connect(self, client, userdata, flags, rc):
         print("Connected to server (i.e., broker) with result code "+str(rc))
@@ -50,7 +51,7 @@ class waterSensor():
         if str(msg.payload, "utf-8")=="start":
             self.sendLevel=True
         elif str(msg.payload, "utf-8")=="stop":
-           self.sendLevel=False
+            self.sendLevel=False
 
     def maxLevel_callback(self, client, userdata, msg):
         self.maxLevel=int(str(msg.payload, "utf-8"))

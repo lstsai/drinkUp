@@ -10,11 +10,10 @@ class waterTracker():
     valid_commands = ['quit', 'q', 'getLevel', 'setMax', 'setMin', 'startSending', 'stopSending' ]
     currWaterLevel=0
     maxLevel=2
-    minLevel=10
+    minLevel=5
     def command_is_valid(self, command):
         if command in self.valid_commands:
             return True
-
         else:
             print('Valid commands are {}'.format(self.valid_commands))
             return False
