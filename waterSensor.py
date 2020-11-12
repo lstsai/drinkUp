@@ -10,8 +10,8 @@ from influxdb import InfluxDBClient
 import grovepi
 class waterSensor():
     sendLevel=True
-    maxLevel=2
-    minLevel=5
+    maxLevel=5
+    minLevel=10
     influxclient=None
     currReading=1
     def connectInflux(self):

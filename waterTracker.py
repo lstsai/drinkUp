@@ -9,8 +9,8 @@ import time
 class waterTracker():
     valid_commands = ['quit', 'q', 'getLevel', 'setMax', 'setMin', 'startSending', 'stopSending' ]
     currWaterLevel=0
-    maxLevel=2
-    minLevel=5
+    maxLevel=5
+    minLevel=10
     def command_is_valid(self, command):
         if command in self.valid_commands:
             return True
