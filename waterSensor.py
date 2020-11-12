@@ -10,8 +10,8 @@ from influxdb import InfluxDBClient
 import grovepi
 class waterSensor():
     sendLevel=True
-    maxLevel=5
-    minLevel=10
+    maxLevel=10
+    minLevel=5
     influxclient=None
     currReading=1
     def connectInflux(self):
@@ -76,21 +76,21 @@ class waterSensor():
         ledMax= 2
         ledMin= 3
         reading =1
-        lastReading=grovepi.ultrasonicRead(ranger)
+        lastReading=13-grovepi.ultrasonicRead(ranger)
         lastReading=1
         while True:
-            self.currReading= grovepi.ultrasonicRead(ranger)
+            self.currReading=13-grovepi.ultrasonicRead(ranger)
             if abs(self.currReading-lastReading)<5:
                 self.sendReading()
                 client.publish("lstsai/waterLevel", self.currReading)
                 lastReading=self.currReading
             if self.sendLevel:
                 self.sendReading()
-            if self.currReading<self.maxLevel:
+            if self.currReading>self.maxLevel:
                 grovepi.digitalWrite(ledMax, 1)
             else:
                 grovepi.digitalWrite(ledMax, 0)
-            if self.currReading>self.minLevel:
+            if self.currReading<self.minLevel:
                 grovepi.digitalWrite(ledMin, 1)
             else:
                 grovepi.digitalWrite(ledMin, 0)

@@ -9,8 +9,8 @@ import time
 class waterTracker():
     valid_commands = ['quit', 'q', 'getLevel', 'setMax', 'setMin', 'startSending', 'stopSending' ]
     currWaterLevel=0
-    maxLevel=5
-    minLevel=10
+    maxLevel=10
+    minLevel=5
     def command_is_valid(self, command):
         if command in self.valid_commands:
             return True
@@ -51,14 +51,14 @@ class waterTracker():
 
             if command == 'setMax':
                 maxL=int(input('Maximum Level: '))
-                if(maxL >self.minLevel):
-                    print("Maximum Level cannot be further than Minimum Level")
+                if(maxL <self.minLevel):
+                    print("Maximum Level lower than Minimum Level")
                 else:
                     client.publish("lstsai/maxLevel", maxL)
             if command == 'setMin':
                 minL=int(input('Minimum Level: '))
-                if(minL <self.maxLevel):
-                    print("Minimum Level cannot be closer than Maximum Level")
+                if(minL >self.maxLevel):
+                    print("Minimum Level cannot be higher than Maximum Level")
                 else:
                     client.publish("lstsai/minLevel", minL)
             if command == 'startSending':
