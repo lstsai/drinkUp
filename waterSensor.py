@@ -80,7 +80,6 @@ class waterSensor():
         lastReading=1
         while True:
             self.currReading=12-grovepi.ultrasonicRead(ranger)
-            print(grovepi.ultrasonicRead(ranger))
             if abs(self.currReading-lastReading)<5:
                 self.sendReading()
                 client.publish("lstsai/waterLevel", self.currReading)
