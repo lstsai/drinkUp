@@ -7,7 +7,7 @@ import paho.mqtt.client as mqtt
 import time
 from datetime import datetime
 from influxdb import InfluxDBClient
-
+import grovipi
 class waterSensor():
     sendLevel=True
     maxLevel=10
@@ -15,12 +15,12 @@ class waterSensor():
     influxclient=None
     currReading=1
     def connectInflux(self):
-        self.influxclient = InfluxDBClient(host='18.219.103.221', port=8086, database='test')
-        self.influxclient.create_database('test')
+        self.influxclient = InfluxDBClient(host='18.219.103.221', port=8086, database='waterSensor')
+        self.influxclient.create_database('waterSensor')
     def sendReading(self):
         json_body = [
             {
-                "measurement": "waterTest",
+                "measurement": "levels",
                 "tags": {
                     "host": "server01",
                     "region": "us-west"
