@@ -85,11 +85,11 @@ class waterSensor():
                 lastReading=self.currReading
             if self.sendLevel:
                 self.sendReading()
-            if self.currReading>self.maxLevel:
+            if self.currReading<self.maxLevel:
                 grovepi.digitalWrite(ledMax, 1)
             else:
                 grovepi.digitalWrite(ledMax, 0)
-            if self.currReading<self.minLevel:
+            if self.currReading>self.minLevel:
                 grovepi.digitalWrite(ledMin, 1)
             else:
                 grovepi.digitalWrite(ledMin, 0)
