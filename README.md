@@ -1,5 +1,5 @@
 Demo link: https://drive.google.com/file/d/1aaX91aVZPxvqaV_fK0syTg5oyxvfGiXC/view?usp=sharing
-Github: https://github.com/lstsai/ee250proj
+Github: https://github.com/lstsai/drinkUp
 No team members
 
 Pre-reqs:
